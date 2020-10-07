@@ -13,7 +13,7 @@ import java.util.Random;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = AppConfig.class)
-class GameShould {
+class GameShouldPB {
 
     private @Autowired Game game;
 
