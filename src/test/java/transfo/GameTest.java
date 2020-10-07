@@ -1,36 +1,34 @@
 package transfo;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = AppConfig.class)
-class GameShould {
+public class GameTest {
 
-    private @Autowired Game game;
-
-//    public GameShould(Game game) {this.game = game;}
+    private static boolean notAWinner;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    @BeforeEach
+    @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
-    @AfterEach
+    @After
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
@@ -38,23 +36,24 @@ class GameShould {
 
 
     @Test
-    public void test_game() {
-        boolean notAWinner;
+    public void test_game(){
+        Game aGame = new Game();
 
-        game.add("Maxime");
-        game.add("Alexandre");
+        aGame.add("Maxime");
+        aGame.add("Alexandre");
 
         Random rand = new Random(10);
 
         do {
 
-            game.roll(rand.nextInt(5) + 1);
+            aGame.roll(rand.nextInt(5) + 1);
 
             if (rand.nextInt(9) == 7) {
-                notAWinner = game.wrongAnswer();
+                notAWinner = aGame.wrongAnswer();
             } else {
-                notAWinner = game.wasCorrectlyAnswered();
+                notAWinner = aGame.wasCorrectlyAnswered();
             }
+
 
 
         } while (notAWinner);
@@ -158,6 +157,5 @@ class GameShould {
                 "Maxime now has 6 Gold Coins.\r\n").isEqualTo(outContent.toString());
 
     }
-
 
 }
