@@ -62,7 +62,10 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
-            if (roll % 2 != 0) {
+            if (roll % 2 == 0) {
+                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+                isGettingOutOfPenaltyBox = false;
+            } else {
                 isGettingOutOfPenaltyBox = true;
 
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
@@ -71,9 +74,6 @@ public class Game {
                 System.out.println("The category is " + board.getCategory(getPlaceOfCurrentPlayer()));
 
                 askQuestion();
-            } else {
-                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
             }
 
         } else {
@@ -110,6 +110,7 @@ public class Game {
             if (isGettingOutOfPenaltyBox) {
 
                 System.out.println("Answer was correct!!!!");
+
                 purses[currentPlayer]++;
 
                 System.out.println(players.get(currentPlayer)
@@ -117,29 +118,25 @@ public class Game {
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-                boolean winner = didPlayerWin();
-                nextPlayer();
 
-                return winner;
-            } else {
-                nextPlayer();
-                return true;
             }
-
+//            else {
+//                nextPlayer();
+//                return true;
+//            }
         } else {
-
             System.out.println("Answer was corrent!!!!");
+
             purses[currentPlayer]++;
+
             System.out.println(players.get(currentPlayer)
                     + " now has "
                     + purses[currentPlayer]
                     + " Gold Coins.");
-
-            boolean winner = didPlayerWin();
-            nextPlayer();
-
-            return winner;
         }
+        boolean winner = didPlayerWin();
+        nextPlayer();
+        return winner;
     }
 
     public boolean wrongAnswer() {
