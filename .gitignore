@@ -1,0 +1,75 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# any dir or subdir (not file, because of the last/) anywhere beginning with temp
+temp*/
+
+# dependencies
+node_modules/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+ 
+# System Files
+.DS_Store
+Thumbs.db
+
+
+# PPT generated tempo files
+~$*
+
+# Maven generated
+.apt_generated/
+target/
+generated/
+
+# eclipse
+.settings/
+.factorypath
+.classpath
+.project
+test-output/
+
+# p6spy
+spy.log
+*.DS_Store
+
+#  yarn
+yarn.lock
+package-lock.json
+
+.idea/
+.tmp/
+coverage/
+dist/
+
+node_modules/
+bower_components/
+build/
