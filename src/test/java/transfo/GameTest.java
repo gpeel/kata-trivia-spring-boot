@@ -71,7 +71,7 @@ public class GameTest {
                 notAWinner = aGame.wasCorrectlyAnswered();
             }
         } while (notAWinner);
-        assertThat(REPONSE_GAME_2_PLAYERS).isEqualTo(outContent.toString());
+        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_2_PLAYERS);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class GameTest {
             aGame.roll(rand.nextInt(5) + 1);
             notAWinner = aGame.wasCorrectlyAnswered();
         } while (notAWinner);
-        assertThat(REPONSE_GAME_3_PLAYERS).isEqualTo(outContent.toString());
+        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_3_PLAYERS);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class GameTest {
                 notAWinner = aGame.wasCorrectlyAnswered();
             }
         } while (notAWinner);
-        assertThat(REPONSE_GAME_5_PLAYERS).isEqualTo(outContent.toString());
+        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_5_PLAYERS);
     }
 
     private static final String REPONSE_GAME_5_PLAYERS =

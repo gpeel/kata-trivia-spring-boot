@@ -12,10 +12,10 @@ public class Game {
     private static int NUMBER_OF_COINS_TO_WIN = 6;
     private static int NUMBER_QUESTION = 50;
 
-    Board board = new Board();
+    Board board = new Board(MAX_PLAYERS);
 
     ArrayList players = new ArrayList();
-    int[] places = new int[MAX_PLAYERS];
+    //    int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
@@ -48,7 +48,7 @@ public class Game {
     public boolean add(String playerName) {
         players.add(playerName);
         int iP = players.size() - 1;
-        places[iP] = 0;
+//        places[iP] = 0;
         purses[iP] = 0;
         inPenaltyBox[iP] = false;
 
@@ -66,13 +66,10 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
 
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                board.movePlayer(currentPlayer, (String) players.get(currentPlayer), roll);
 
-                System.out.println(players.get(currentPlayer)
-                        + "'s new location is "
-                        + places[currentPlayer]);
                 System.out.println("The category is " + board.getCategory(getPlaceOfCurrentPlayer()));
+
                 askQuestion();
             } else {
                 System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -80,12 +77,7 @@ public class Game {
             }
 
         } else {
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-
-            System.out.println(players.get(currentPlayer)
-                    + "'s new location is "
-                    + places[currentPlayer]);
+            board.movePlayer(currentPlayer, (String) players.get(currentPlayer), roll);
             System.out.println("The category is " + board.getCategory(getPlaceOfCurrentPlayer()));
             askQuestion();
         }
@@ -104,21 +96,9 @@ public class Game {
     }
 
     private int getPlaceOfCurrentPlayer() {
-        return places[currentPlayer];
+        return board.getPlacesOfPlayer(currentPlayer);
     }
 
-//    private String board.getCategory(() {
-//        if (places[currentPlayer] == 0) return "Pop";
-//        if (places[currentPlayer] == 4) return "Pop";
-//        if (places[currentPlayer] == 8) return "Pop";
-//        if (places[currentPlayer] == 1) return "Science";
-//        if (places[currentPlayer] == 5) return "Science";
-//        if (places[currentPlayer] == 9) return "Science";
-//        if (places[currentPlayer] == 2) return "Sports";
-//        if (places[currentPlayer] == 6) return "Sports";
-//        if (places[currentPlayer] == 10) return "Sports";
-//        return "Rock";
-//    }
 
     public boolean wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer]) {
