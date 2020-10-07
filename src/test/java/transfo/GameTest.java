@@ -1,5 +1,6 @@
 package transfo;
 
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,10 +10,12 @@ import java.io.PrintStream;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class GameTest {
 
     private static boolean notAWinner;
+    private Game aGame;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -21,6 +24,8 @@ public class GameTest {
 
     @Before
     public void setUpStreams() {
+        aGame = new Game();
+        aGame.initialize();
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -33,8 +38,27 @@ public class GameTest {
 
 
     @Test
+    public void test_game_5_players_MAX() {
+        boolean hasException = false;
+        aGame.add("Maxime");
+        aGame.add("Alexandre");
+        aGame.add("Alexandre");
+        aGame.add("Alexandre");
+        aGame.add("Alexandre");
+
+        try {
+            aGame.add("Alexandre");
+            fail("ONly 6 players max");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // je dois passer ICI
+            hasException = true;
+        }
+        Assertions.assertThat(hasException).isEqualTo(true);
+
+    }
+
+    @Test
     public void test_game_2_players() {
-        Game aGame = new Game();
         aGame.add("Maxime");
         aGame.add("Alexandre");
         Random rand = new Random(10);
@@ -53,7 +77,6 @@ public class GameTest {
 
     @Test
     public void test_game_3_players() {
-        Game aGame = new Game();
         aGame.add("Maxime");
         aGame.add("Alexandre");
         aGame.add("Geoffrey");
@@ -69,7 +92,6 @@ public class GameTest {
 
     @Test
     public void test_game_5_players() {
-        Game aGame = new Game();
         aGame.add("Maxime");
         aGame.add("Alexandre");
         aGame.add("Geoffrey");

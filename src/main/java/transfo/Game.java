@@ -2,15 +2,20 @@ package transfo;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Component
 public class Game {
+    private static int MAX_PLAYERS = 5;
+    private static int NUMBER_OF_COINS_TO_WIN = 6;
+    private static int NUMBER_QUESTION = 50;
+
     ArrayList players = new ArrayList();
-    int[] places = new int[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
+    int[] places = new int[MAX_PLAYERS];
+    int[] purses = new int[MAX_PLAYERS];
+    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
@@ -20,8 +25,9 @@ public class Game {
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
-    public Game() {
-        for (int i = 0; i < 50; i++) {
+    @PostConstruct
+    public void initialize() {
+        for (int i = 0; i < NUMBER_QUESTION; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
@@ -29,29 +35,25 @@ public class Game {
         }
     }
 
+
     public String createRockQuestion(int index) {
         return "Rock Question " + index;
     }
 
     public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
+        return (players.size() >= 2);
     }
 
     public boolean add(String playerName) {
-
-
         players.add(playerName);
-        places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
+        int iP = players.size() - 1;
+        places[iP] = 0;
+        purses[iP] = 0;
+        inPenaltyBox[iP] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
         return true;
-    }
-
-    public int howManyPlayers() {
-        return players.size();
     }
 
     public void roll(int roll) {
@@ -166,6 +168,6 @@ public class Game {
 
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+        return !(purses[currentPlayer] == NUMBER_OF_COINS_TO_WIN);
     }
 }
