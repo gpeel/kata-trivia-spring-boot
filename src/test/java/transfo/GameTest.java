@@ -36,7 +36,6 @@ public class GameTest {
         System.setErr(originalErr);
     }
 
-
     @Test
     public void test_game_5_players_MAX() {
         boolean hasException = false;
