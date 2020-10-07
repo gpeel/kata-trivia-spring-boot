@@ -24,11 +24,11 @@ public class Board {
         nbPlayers++;
     }
 
-    public int getPlacesOfPlayer(int player) {
+    public int getPlaceOfPlayer(int player) {
         return places[player];
     }
 
-    public void movePlayer(int player, String playerName, int roll) {
+    public void movePlayerWithRoll(int player, String playerName, int roll) {
         places[player] = (places[player] + roll);
         if (places[player] > 11) places[player] = places[player] - 12;
         System.out.println(playerName + "'s new location is " + places[player]);
