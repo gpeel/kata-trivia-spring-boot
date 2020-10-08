@@ -9,9 +9,10 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 
 /**
  * The Game class responsability is defining the RULES of the Game.
- * It contains basically only the public API.
+ * It contains basically only the public API and those Rules.
  * => addPlayer(), roll(), rightAnswer(), wrongAnswer()
- * and initialization
+ * and initialization.
+ * Subclasses do not access properties. they trickle down from here to Board and QuestionDeck
  */
 @Component
 @Scope(SCOPE_PROTOTYPE)
@@ -20,6 +21,9 @@ public class Game {
     private static int MAX_PLAYERS = 5;
     private static int NUMBER_OF_COINS_TO_WIN = 6;
     private static int NUMBER_QUESTION = 50;
+    private static String[] CELLS_CATEGORY = new String[]
+            {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
+                    "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
     // Spring @Component
     private final Board board;
@@ -38,14 +42,14 @@ public class Game {
 
     @PostConstruct
     public void initialize() {
-        board.initializeTheBoard(NUMBER_QUESTION);
+        board.initializeTheBoard(NUMBER_QUESTION, CELLS_CATEGORY);
     }
 
 
     public void addPlayer(String playerName) {
         // this is a RULE, so it's here in the Game class
         if (board.getNumberOfPlayers() >= MAX_PLAYERS) {
-            throw new RuntimeException("The limit MAX of Player of "
+            throw new RuntimeException("The limit MAX of Players of "
                     + MAX_PLAYERS + " is already reached!");
         }
         board.addPlayerForName(playerName);

@@ -22,10 +22,8 @@ public class Board {
     private final Console console;
     private final QuestionDeck questionDeck;
 
-    // 12 cases
-    private String[] cellsCategory = new String[]
-            {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
-                    "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
+    // 12 cells
+    private String[] cellsCategory;
 
     private Map<Player, Integer> cellNumberForPlayerMap = new HashMap<>();
     private List<Player> players = new ArrayList<>();
@@ -37,7 +35,8 @@ public class Board {
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
-    public void initializeTheBoard(int numberOfQuestions) {
+    public void initializeTheBoard(int numberOfQuestions, String[] cellsCategory ) {
+        this.cellsCategory = cellsCategory;
         questionDeck.initializeTheDeck(numberOfQuestions);
     }
 
