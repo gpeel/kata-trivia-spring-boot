@@ -1,28 +1,29 @@
-package transfo.right;
+package trivia.thegame;
 
+import gauthier.OutContent;
+import gauthier.SystemBufferTestExecutionListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
-import transfo.Game;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static transfo.right.GameRightTestData.*;
+import static trivia.thegame.GameTestData.*;
 
 @SpringBootTest
 @TestExecutionListeners(SystemBufferTestExecutionListener.class)
-class GameRightShould {
+class GameShould {
 
     private final Game aGame;
     private boolean notAWinner;
 
     @Autowired
-    public GameRightShould(Game game) {this.aGame = game;}
+    public GameShould(Game game) {this.aGame = game;}
 
     @OutContent
     private ByteArrayOutputStream outContent;

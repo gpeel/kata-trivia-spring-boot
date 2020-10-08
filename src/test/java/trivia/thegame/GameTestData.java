@@ -1,7 +1,6 @@
-package transfo;
+package trivia.thegame;
 
 public class GameTestData {
-
 
     public static final String REPONSE_GAME_5_PLAYERS =
             //<editor-fold desc="REPONSE_GAME_5_PLAYERS">
@@ -221,7 +220,6 @@ public class GameTestData {
                     "Answer was corrent!!!!\r\n" +
                     "Arnaud now has 6 Gold Coins.\r\n";
     //</editor-fold>
-
 
     public static final String REPONSE_GAME_3_PLAYERS =
             //<editor-fold desc="REPONSE_GAME_3_PLAYERS">

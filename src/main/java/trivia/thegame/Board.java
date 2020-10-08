@@ -1,4 +1,4 @@
-package transfo;
+package trivia.thegame;
 
 public class Board {
     private final int MAX_PLAYERS;

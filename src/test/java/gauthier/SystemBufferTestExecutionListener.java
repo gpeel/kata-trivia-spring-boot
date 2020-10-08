@@ -1,4 +1,4 @@
-package transfo.right;
+package gauthier;
 
 import org.fest.reflect.core.Reflection;
 import org.slf4j.Logger;

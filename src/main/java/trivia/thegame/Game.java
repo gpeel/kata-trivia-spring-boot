@@ -1,7 +1,8 @@
-package transfo;
+package trivia.thegame;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import trivia.thegame.Board;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;

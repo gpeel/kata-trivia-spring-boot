@@ -1,14 +1,9 @@
-package transfo.nospring;
+package starting_point;
 
 import org.assertj.core.api.Assertions;
-// junit 4
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import transfo.Game;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -30,7 +25,6 @@ public class GameTest {
     @BeforeEach
     public void setUpStreams() {
         aGame = new Game();
-        aGame.initialize();
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }

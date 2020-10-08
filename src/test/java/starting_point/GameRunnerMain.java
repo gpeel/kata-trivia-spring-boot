@@ -1,6 +1,4 @@
-package transfo.nospring;
-
-import transfo.Game;
+package starting_point;
 
 import java.util.Random;
 

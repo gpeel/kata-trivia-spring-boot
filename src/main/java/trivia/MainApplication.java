@@ -1,4 +1,4 @@
-package transfo;
+package trivia;
 
 import org.springframework.boot.SpringApplication;
 
