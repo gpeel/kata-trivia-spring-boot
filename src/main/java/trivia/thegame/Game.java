@@ -59,7 +59,9 @@ public class Game {
         if (players.size() >= MAX_PLAYERS) {
             throw new RuntimeException("The limit MAX of Player is already reached!");
         }
-        players.add(new Player(playerName));
+        Player player = new Player(playerName);
+        players.add(player);
+        board.addPlayer(player);
         if (players.size() == 1) {
             currentPlayer = players.get(0);
         }
@@ -81,9 +83,9 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
 
                 System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
-                board.movePlayerWithRoll(indexOfCurrentPlayer, (String) currentPlayer.getName(), roll);
+                board.movePlayerWithRoll(currentPlayer, roll);
 
-                int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
+                int cellNumber = board.getCellNumberForPlayer(currentPlayer);
                 String cat = board.getCellCategory(cellNumber);
 
                 System.out.println("The category is " + cat);
@@ -92,8 +94,8 @@ public class Game {
             }
 
         } else {
-            board.movePlayerWithRoll(indexOfCurrentPlayer, (String) currentPlayer.getName(), roll);
-            int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
+            board.movePlayerWithRoll(currentPlayer, roll);
+            int cellNumber = board.getCellNumberForPlayer(currentPlayer);
             String cat = board.getCellCategory(cellNumber);
 
             System.out.println("The category is " + cat);
@@ -104,9 +106,7 @@ public class Game {
 
 
     private void askQuestion() {
-        int indexOfCurrentPlayer = players.indexOf(currentPlayer);
-        int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
-        String cat = board.getCellCategory(cellNumber);
+        String cat = board.getCategoryForPlayer(currentPlayer);
         if (cat.equals("Pop"))
             System.out.println(popQuestions.removeFirst());
         if (cat.equals("Science"))

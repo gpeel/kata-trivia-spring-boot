@@ -53,33 +53,7 @@ public class GameTestData {
                     "Answer was correct!!!!\n" +
                     "Max now has 2 Gold Coins.\n";
     //</editor-fold>
-    //<editor-fold desc="">
-    String ff =
-            "Max was added\n" +
-                    "They are player number 1\n" +
-                    "Max is the current player\n" +
-                    "They have rolled a 2\n" +
-                    "Max's new location is 2\n" +
-                    "The category is Pop\n" +
-                    "Pop Question 0\n" +
-                    "Question was incorrectly answered\n" +
-                    "Max was sent to the penalty box\n" +
-                    "Max is the current player\n" +
-                    "They have rolled a 1\n" +
-                    "Max is getting out of the penalty box\n" +
-                    "Max's new location is 3\n" +
-                    "The category is Pop\n" +
-                    "Pop Question 1\n" +
-                    "Answer was correct!!!!\n" +
-                    "Max now has 1 Gold Coins.\n" +
-                    "Max is the current player\n" +
-                    "They have rolled a 2\n" +
-                    "Max's new location is 5\n" +
-                    "The category is Pop\n" +
-                    "Pop Question 2\n" +
-                    "Answer was correct!!!!\n" +
-                    "Max now has 2 Gold Coins.";
-    //</editor-fold>
+
 
     public static final String REPONSE_GAME_5_PLAYERS =
             //<editor-fold desc="REPONSE_GAME_5_PLAYERS">

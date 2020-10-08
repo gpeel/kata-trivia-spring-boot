@@ -3,37 +3,45 @@ package trivia.thegame;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class Board {
-    private final int MAX_PLAYERS;
     // 12 cases
     private String[] cellsCategory = new String[]
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
                     "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
-    private int[] cellNumberOfPlayers;
+    private Map<Player, Integer> cellNumberOfPlayers = new HashMap<>();
 
     public Board() {
-        MAX_PLAYERS = 5;
-        cellNumberOfPlayers = new int[MAX_PLAYERS];
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    public void addPlayer(Player player) {
+        cellNumberOfPlayers.put(player, new Integer(0));
     }
 
     public String getCellCategory(int cellNumber) {
         return cellsCategory[cellNumber];
     }
 
-
-    public int getPlaceOfPlayer(int player) {
-        return cellNumberOfPlayers[player];
+    public String getCategoryForPlayer(Player player) {
+        return cellsCategory[cellNumberOfPlayers.get(player)];
     }
 
-    public void movePlayerWithRoll(int player, String playerName, int roll) {
-        cellNumberOfPlayers[player] = (cellNumberOfPlayers[player] + roll) % 12;
-        System.out.println(playerName + "'s new location is " + cellNumberOfPlayers[player]);
+    public int getCellNumberForPlayer(Player player) {
+        return cellNumberOfPlayers.get(player);
+    }
+
+    public void movePlayerWithRoll(Player player, int roll) {
+        int newCellForPlayer = (cellNumberOfPlayers.get(player) + roll) % 12;
+        cellNumberOfPlayers.put(player, new Integer(newCellForPlayer));
+        System.out.println(player.getName() + "'s new location is " + cellNumberOfPlayers.get(player));
     }
 
 }
