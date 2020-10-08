@@ -50,7 +50,7 @@ public class Board {
         } else {
             currentPlayer = players.get((players.indexOf(currentPlayer) + 1) % players.size());
         }
-        System.out.println(currentPlayer.getName() + " is the current player");
+        console.printCurrentPlayer(currentPlayer);
         return currentPlayer;
     }
 
