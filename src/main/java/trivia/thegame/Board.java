@@ -44,6 +44,7 @@ public class Board {
         int newCellForPlayer = (cellNumberForPlayerMap.get(player) + roll) % 12;
         cellNumberForPlayerMap.put(player, new Integer(newCellForPlayer));
         System.out.println(player.getName() + "'s new location is " + cellNumberForPlayerMap.get(player));
+        System.out.println("The category is " + getCategoryForPlayer(player));
     }
 
 }

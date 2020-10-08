@@ -23,7 +23,6 @@ public class Game {
 
     List<Player> players = new ArrayList();
     Player currentPlayer;
-//    int currentPlayerIndex = 0;
 
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
@@ -71,7 +70,6 @@ public class Game {
     public void roll(int roll) {
         System.out.println(currentPlayer.getName() + " is the current player");
         System.out.println("They have rolled a " + roll);
-        int indexOfCurrentPlayer = players.indexOf(currentPlayer);
 
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
@@ -81,21 +79,14 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
 
                 System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
+
                 board.movePlayerWithRoll(currentPlayer, roll);
-
-                String cat = board.getCategoryForPlayer(currentPlayer);
-
-                System.out.println("The category is " + cat);
 
                 askQuestion();
             }
 
         } else {
             board.movePlayerWithRoll(currentPlayer, roll);
-            int cellNumber = board.getCellNumberForPlayer(currentPlayer);
-            String cat = board.getCellCategory(cellNumber);
-
-            System.out.println("The category is " + cat);
             askQuestion();
         }
 
