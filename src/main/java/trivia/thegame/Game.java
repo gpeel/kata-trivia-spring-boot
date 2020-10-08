@@ -2,7 +2,6 @@ package trivia.thegame;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import trivia.thegame.Board;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -127,14 +126,14 @@ public class Game {
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-//                inPenaltyBox[currentPlayer] = false; // BUG correction to aneble to leave the Penalty BOX
+                inPenaltyBox[currentPlayer] = false; // BUG correction to aneble to leave the Penalty BOX
             }
 //            else {
 //                nextPlayer();
 //                return true;
 //            }
         } else {
-            System.out.println("Answer was corrent!!!!");
+            System.out.println("Answer was correct!!!!");
 
             purses[currentPlayer]++;
 
