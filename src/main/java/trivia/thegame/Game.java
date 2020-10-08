@@ -70,12 +70,11 @@ public class Game {
             } else {
                 System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
                 hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = true;
-
-                board.movePlayerWithRoll(currentPlayer, roll);
+                board.movePlayer(currentPlayer, roll);
                 askQuestion();
             }
         } else {
-            board.movePlayerWithRoll(currentPlayer, roll);
+            board.movePlayer(currentPlayer, roll);
             askQuestion();
         }
     }
@@ -113,8 +112,7 @@ public class Game {
             currentPlayer.incrementGold();
             currentPlayer.printPlayerBankAccount();
         }
-        boolean winner = !currentPlayer.isWinner(NUMBER_OF_COINS_TO_WIN);
-        return winner;
+        return !currentPlayer.isWinner(NUMBER_OF_COINS_TO_WIN);
     }
 
     public boolean wrongAnswer() {
