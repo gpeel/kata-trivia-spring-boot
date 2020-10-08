@@ -20,7 +20,6 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Scope(SCOPE_PROTOTYPE)
 public class Game {
 
-
     // Spring @Component
     private final Board board;
     private final Console console;
@@ -91,7 +90,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         console.printIncorrectAnswer();
-        currentPlayer.goToPenalTyBox();
+        currentPlayer.goToPenaltyBox();
         return true;
     }
 

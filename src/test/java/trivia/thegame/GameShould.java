@@ -47,7 +47,7 @@ class GameShould {
             aGame.addPlayer("Alexandre");
             fail("ONLY 5 players max!");
         } catch (Exception e) {
-            // je dois passer ICI
+            // execution must arrive here
             hasException = true;
         }
         Assertions.assertThat(hasException).isEqualTo(true);
@@ -93,7 +93,8 @@ class GameShould {
         aGame.rightAnswer(); // KO no more Gold !
 
         // ASSERT
-        assertThat(outContent.toString()).isEqualTo(REPONSE_IF_PENALTY_VISITED_NO_MORE_GOLD_ON_EVEN_ROLL);
+        assertThat(outContent.toString().replaceAll("\r\n", "\n"))
+                .isEqualTo(REPONSE_IF_PENALTY_VISITED_NO_MORE_GOLD_ON_EVEN_ROLL.replaceAll("\r\n", "\n"));
     }
 
     @Test
@@ -124,7 +125,7 @@ class GameShould {
             aGame.roll(rand.nextInt(5) + 1);
 
             if (rand.nextInt(9) == 7) {
-                notAWinner = aGame.wrongAnswer();
+                aGame.wrongAnswer();
             } else {
                 notAWinner = aGame.rightAnswer();
             }
@@ -163,13 +164,11 @@ class GameShould {
             aGame.roll(rand.nextInt(5) + 1);
 
             if (rand.nextInt(3) == 2) {
-                notAWinner = aGame.wrongAnswer();
+                aGame.wrongAnswer();
             } else {
                 notAWinner = aGame.rightAnswer();
             }
         } while (notAWinner);
-//        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_5_PLAYERS);
-        // ASSERT
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
                 .isEqualTo(REPONSE_CORRECTED_GAME_5_PLAYERS.replaceAll("\r\n", "\n"));
 
