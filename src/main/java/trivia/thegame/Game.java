@@ -29,7 +29,7 @@ public class Game {
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
 
-    boolean isGettingOutOfPenaltyBox;
+    boolean hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion;
 
     public Game(Board board) {
         this.board = board;
@@ -74,9 +74,9 @@ public class Game {
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
                 System.out.println(currentPlayer.getName() + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
+                hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = false;
             } else {
-                isGettingOutOfPenaltyBox = true;
+                hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = true;
 
                 System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
 
@@ -108,7 +108,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (currentPlayer.isInPenaltyBox()) {
-            if (isGettingOutOfPenaltyBox) {
+            if (hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion) {
                 System.out.println("Answer was correct!!!!");
                 currentPlayer.incrementGold();
                 currentPlayer.printPlayerBankAccount();
