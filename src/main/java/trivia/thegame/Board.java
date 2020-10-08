@@ -70,7 +70,7 @@ public class Board {
         int newCellForPlayer = (cellNumberForPlayerMap.get(player) + roll) % 12;
         cellNumberForPlayerMap.put(player, newCellForPlayer);
         console.printPlayerNewLocation(player, cellNumberForPlayerMap.get(player));
-        System.out.println("The category is " + getCategoryForPlayer(player));
+        console.printCategory(getCategoryForPlayer(player));
     }
 
 }

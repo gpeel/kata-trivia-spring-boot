@@ -17,5 +17,8 @@ public class Console {
     public void printPlayerNewLocation(Player player, int cellNumber) {
         System.out.println(player.getName() + "'s new location is " + cellNumber);
     }
+    public void printCategory(String category) {
+        System.out.println("The category is " + category);
+    }
 
 }
