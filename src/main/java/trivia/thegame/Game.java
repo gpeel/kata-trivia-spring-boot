@@ -85,8 +85,7 @@ public class Game {
                 System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
                 board.movePlayerWithRoll(currentPlayer, roll);
 
-                int cellNumber = board.getCellNumberForPlayer(currentPlayer);
-                String cat = board.getCellCategory(cellNumber);
+                String cat = board.getCategoryForPlayer(currentPlayer);
 
                 System.out.println("The category is " + cat);
 
@@ -121,27 +120,15 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (currentPlayer.isInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
-
                 System.out.println("Answer was correct!!!!");
-
                 currentPlayer.incrementGold();
-
-                System.out.println(currentPlayer.getName()
-                        + " now has "
-                        + currentPlayer.getPurse()
-                        + " Gold Coins.");
-
+                currentPlayer.printPlayerBankAccount();
                 currentPlayer.getOutOfPenalTyBox();
             }
         } else {
             System.out.println("Answer was correct!!!!");
-
             currentPlayer.incrementGold();
-
-            System.out.println(currentPlayer.getName()
-                    + " now has "
-                    + currentPlayer.getPurse()
-                    + " Gold Coins.");
+            currentPlayer.printPlayerBankAccount();
         }
         boolean winner = !currentPlayer.isWinner(NUMBER_OF_COINS_TO_WIN);
         nextPlayer();
@@ -150,8 +137,6 @@ public class Game {
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(currentPlayer.getName() + " was sent to the penalty box");
-
         currentPlayer.goToPenalTyBox();
         nextPlayer();
         return true;

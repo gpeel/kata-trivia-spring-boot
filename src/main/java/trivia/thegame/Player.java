@@ -21,6 +21,10 @@ public class Player {
         return this.purse == coinsToHaveToBeWinner;
     }
 
+    public void printPlayerBankAccount() {
+        System.out.println(name + " now has " + purse + " Gold Coins.");
+    }
+
     public String getName() {
         return name;
     }
@@ -29,15 +33,9 @@ public class Player {
         return inPenaltyBox;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPurse() {
-        return purse;
-    }
 
     public void goToPenalTyBox() {
+        System.out.println(name + " was sent to the penalty box");
         this.inPenaltyBox = true;
     }
 
