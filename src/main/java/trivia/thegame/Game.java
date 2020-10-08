@@ -2,6 +2,10 @@ package trivia.thegame;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import trivia.thegame.sub.Board;
+import trivia.thegame.sub.Console;
+import trivia.thegame.sub.Player;
+import trivia.thegame.sub.QuestionDeck;
 
 import javax.annotation.PostConstruct;
 
@@ -72,6 +76,9 @@ public class Game {
         }
     }
 
+    /**
+     * @return true if winner
+     */
     public boolean rightAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
             if (hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion) {
@@ -85,7 +92,7 @@ public class Game {
             currentPlayer.incrementGold();
             currentPlayer.printPlayerBankAccount();
         }
-        return !currentPlayer.isWinner(gameProperties.getNumberOfCoinsToWin());
+        return currentPlayer.isWinner(gameProperties.getNumberOfCoinsToWin());
     }
 
     public boolean wrongAnswer() {

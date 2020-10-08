@@ -21,7 +21,7 @@ import static trivia.thegame.GameTestData.*;
 class GameShould {
 
     private final Game aGame;
-    private boolean notAWinner;
+    private boolean winner;
 
     @Autowired
     public GameShould(Game game) {this.aGame = game;}
@@ -77,6 +77,7 @@ class GameShould {
      *      Answer was corrent!!!!
      *      Max now has 2 Gold Coins.
      * </pre>
+     * I disabled this test because I corrected this issue in the code
      */
     @Test
     @Disabled
@@ -108,7 +109,7 @@ class GameShould {
         aGame.rightAnswer(); // ok + 1 Gold
         // now Max should be out, and a correct answer should score
         aGame.roll(2); // even or odd should score + 1 in Gold
-        aGame.rightAnswer(); // KO no more Gold !
+        aGame.rightAnswer(); // OK now Max get one more Gold ! NOW the bug is corrected
 
         // ASSERT
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
@@ -127,9 +128,9 @@ class GameShould {
             if (rand.nextInt(9) == 7) {
                 aGame.wrongAnswer();
             } else {
-                notAWinner = aGame.rightAnswer();
+                winner = aGame.rightAnswer();
             }
-        } while (notAWinner);
+        } while (!winner);
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
                 .isEqualTo(REPONSE_GAME_2_PLAYERS.replaceAll("\r\n", "\n"));
     }
@@ -144,8 +145,8 @@ class GameShould {
 
         do {
             aGame.roll(rand.nextInt(5) + 1);
-            notAWinner = aGame.rightAnswer();
-        } while (notAWinner);
+            winner = aGame.rightAnswer();
+        } while (!winner);
 
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
                 .isEqualTo(REPONSE_GAME_3_PLAYERS.replaceAll("\r\n", "\n"));
@@ -166,9 +167,9 @@ class GameShould {
             if (rand.nextInt(3) == 2) {
                 aGame.wrongAnswer();
             } else {
-                notAWinner = aGame.rightAnswer();
+                winner = aGame.rightAnswer();
             }
-        } while (notAWinner);
+        } while (!winner);
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
                 .isEqualTo(REPONSE_CORRECTED_GAME_5_PLAYERS.replaceAll("\r\n", "\n"));
 

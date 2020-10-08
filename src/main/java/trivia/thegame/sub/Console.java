@@ -1,4 +1,4 @@
-package trivia.thegame;
+package trivia.thegame.sub;
 
 import org.springframework.stereotype.Component;
 
