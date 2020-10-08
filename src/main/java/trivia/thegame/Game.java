@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.LinkedList;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
@@ -19,15 +18,12 @@ public class Game {
     private static int NUMBER_OF_COINS_TO_WIN = 6;
     private static int NUMBER_QUESTION = 50;
 
-
+    // Spring @Component
     private final Board board;
     private final Console console;
-    Player currentPlayer;
 
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    // local
+    Player currentPlayer;
 
     boolean hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion;
 
@@ -39,12 +35,7 @@ public class Game {
 
     @PostConstruct
     public void initialize() {
-        for (int i = 0; i < NUMBER_QUESTION; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
-        }
+        board.initializeTheBoard(NUMBER_QUESTION);
     }
 
 
@@ -69,33 +60,13 @@ public class Game {
                 console.printGettingOutOfPenaltyBox(currentPlayer.getName());
                 hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = true;
                 board.movePlayer(currentPlayer, roll);
-                askQuestion();
+                board.askQuestion();
             }
         } else {
             board.movePlayer(currentPlayer, roll);
-            askQuestion();
+            board.askQuestion();
         }
     }
-
-
-    private void askQuestion() {
-        String categoryOfAskedQuestion = board.getCategoryForPlayer(currentPlayer);
-        switch (categoryOfAskedQuestion) {
-            case "Pop":
-                System.out.println(popQuestions.removeFirst());
-                break;
-            case "Science":
-                System.out.println(scienceQuestions.removeFirst());
-                break;
-            case "Sports":
-                System.out.println(sportsQuestions.removeFirst());
-                break;
-            case "Rock":
-                System.out.println(rockQuestions.removeFirst());
-                break;
-        }
-    }
-
 
     public boolean wasCorrectlyAnswered() {
         if (currentPlayer.isInPenaltyBox()) {

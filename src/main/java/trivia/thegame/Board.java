@@ -37,6 +37,15 @@ public class Board {
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
+    public void initializeTheBoard(int numberOfQuestions) {
+        questionDeck.initializeTheDeck(numberOfQuestions);
+    }
+
+    public void askQuestion() {
+        String category = getCategoryForPlayer(currentPlayer);
+        questionDeck.askQuestion(category);
+    }
+
     public void addPlayerForName(String playerName) {
         Player player = new Player(playerName);
         players.add(player);
@@ -62,8 +71,8 @@ public class Board {
         return cellsCategory[cellNumber];
     }
 
-    public String getCategoryForPlayer(Player player) {
-        return cellsCategory[cellNumberForPlayerMap.get(player)];
+    private String getCategoryForPlayer(Player player) {
+        return cellsCategory[cellNumberForPlayerMap.get(currentPlayer)];
     }
 
     public int getCellNumberForPlayer(Player player) {
