@@ -8,7 +8,10 @@ import javax.annotation.PostConstruct;
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 /**
- * The Game class responsability is defining the RULES of the Game
+ * The Game class responsability is defining the RULES of the Game.
+ * It contains basically only the public API.
+ * => addPlayer(), roll(), rightAnswer(), wrongAnswer()
+ * and initialization
  */
 @Component
 @Scope(SCOPE_PROTOTYPE)
@@ -39,7 +42,7 @@ public class Game {
     }
 
 
-    public void add(String playerName) {
+    public void addPlayer(String playerName) {
         // this is a RULE, so it's here in the Game class
         if (board.getNumberOfPlayers() >= MAX_PLAYERS) {
             throw new RuntimeException("The limit MAX of Player of "
@@ -68,7 +71,7 @@ public class Game {
         }
     }
 
-    public boolean wasCorrectlyAnswered() {
+    public boolean rightAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
             if (hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion) {
                 console.printCorrectAnswer();

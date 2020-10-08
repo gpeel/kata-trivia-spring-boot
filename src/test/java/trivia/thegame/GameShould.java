@@ -37,14 +37,14 @@ class GameShould {
     @Test
     public void test_game_5_players_MAX() {
         boolean hasException = false;
-        aGame.add("Maxime");
-        aGame.add("Alexandre");
-        aGame.add("Alexandre");
-        aGame.add("Alexandre");
-        aGame.add("Alexandre");
+        aGame.addPlayer("Maxime");
+        aGame.addPlayer("Alexandre");
+        aGame.addPlayer("Alexandre");
+        aGame.addPlayer("Alexandre");
+        aGame.addPlayer("Alexandre");
 
         try {
-            aGame.add("Alexandre");
+            aGame.addPlayer("Alexandre");
             fail("ONLY 5 players max!");
         } catch (Exception e) {
             // je dois passer ICI
@@ -81,16 +81,16 @@ class GameShould {
     @Test
     @Disabled
     public void test_cannot_leave_penalty_box() {
-        aGame.add("Max");
+        aGame.addPlayer("Max");
         // ACT
         aGame.roll(2);
         aGame.wrongAnswer();
         // now Max is in PenaltyBox
         aGame.roll(1);
-        aGame.wasCorrectlyAnswered(); // ok + 1 Gold
+        aGame.rightAnswer(); // ok + 1 Gold
         // now Max should be out, and a correct answer should score
         aGame.roll(2); // even or odd should score + 1 in Gold
-        aGame.wasCorrectlyAnswered(); // KO no more Gold !
+        aGame.rightAnswer(); // KO no more Gold !
 
         // ASSERT
         assertThat(outContent.toString()).isEqualTo(REPONSE_IF_PENALTY_VISITED_NO_MORE_GOLD_ON_EVEN_ROLL);
@@ -98,16 +98,16 @@ class GameShould {
 
     @Test
     public void test_penalty_box_corrected() {
-        aGame.add("Max");
+        aGame.addPlayer("Max");
         // ACT
         aGame.roll(2);
         aGame.wrongAnswer();
         // now Max is in PenaltyBox
         aGame.roll(1);
-        aGame.wasCorrectlyAnswered(); // ok + 1 Gold
+        aGame.rightAnswer(); // ok + 1 Gold
         // now Max should be out, and a correct answer should score
         aGame.roll(2); // even or odd should score + 1 in Gold
-        aGame.wasCorrectlyAnswered(); // KO no more Gold !
+        aGame.rightAnswer(); // KO no more Gold !
 
         // ASSERT
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
@@ -116,8 +116,8 @@ class GameShould {
 
     @Test
     public void test_game_2_players() {
-        aGame.add("Maxime");
-        aGame.add("Alexandre");
+        aGame.addPlayer("Maxime");
+        aGame.addPlayer("Alexandre");
         Random rand = new Random(10);
 
         do {
@@ -126,7 +126,7 @@ class GameShould {
             if (rand.nextInt(9) == 7) {
                 notAWinner = aGame.wrongAnswer();
             } else {
-                notAWinner = aGame.wasCorrectlyAnswered();
+                notAWinner = aGame.rightAnswer();
             }
         } while (notAWinner);
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
@@ -135,15 +135,15 @@ class GameShould {
 
     @Test
     public void test_game_3_players() {
-        aGame.add("Maxime");
-        aGame.add("Alexandre");
-        aGame.add("Geoffrey");
+        aGame.addPlayer("Maxime");
+        aGame.addPlayer("Alexandre");
+        aGame.addPlayer("Geoffrey");
 
         Random rand = new Random(5);
 
         do {
             aGame.roll(rand.nextInt(5) + 1);
-            notAWinner = aGame.wasCorrectlyAnswered();
+            notAWinner = aGame.rightAnswer();
         } while (notAWinner);
 
         assertThat(outContent.toString().replaceAll("\r\n", "\n"))
@@ -152,11 +152,11 @@ class GameShould {
 
     @Test
     public void test_game_5_players() {
-        aGame.add("Maxime");
-        aGame.add("Alexandre");
-        aGame.add("Geoffrey");
-        aGame.add("Gauthier");
-        aGame.add("Arnaud");
+        aGame.addPlayer("Maxime");
+        aGame.addPlayer("Alexandre");
+        aGame.addPlayer("Geoffrey");
+        aGame.addPlayer("Gauthier");
+        aGame.addPlayer("Arnaud");
         Random rand = new Random(177777);
 
         do {
@@ -165,7 +165,7 @@ class GameShould {
             if (rand.nextInt(3) == 2) {
                 notAWinner = aGame.wrongAnswer();
             } else {
-                notAWinner = aGame.wasCorrectlyAnswered();
+                notAWinner = aGame.rightAnswer();
             }
         } while (notAWinner);
 //        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_5_PLAYERS);
