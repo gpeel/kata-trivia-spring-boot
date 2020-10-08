@@ -20,17 +20,12 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Scope(SCOPE_PROTOTYPE)
 public class Game {
 
-    // those variables are in application.properties
-    //    private static int MAX_PLAYERS = 5;
-    //    private static int NUMBER_OF_COINS_TO_WIN = 6;
-    //    private static int NUMBER_OF_QUESTIONS = 50;
-    //    private static String[] CELLS_CATEGORY = new String[]
-    //            {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
-    //                    "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
     // Spring @Component
     private final Board board;
     private final Console console;
+    // MAX_PLAYERS,NUMBER_OF_COINS_TO_WIN etc  are in java/resources/application.properties
+    // and mapped by Spring into GameProperties
     private final GameProperties gameProperties;
 
     // local
