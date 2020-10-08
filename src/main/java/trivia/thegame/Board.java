@@ -69,7 +69,7 @@ public class Board {
     public void movePlayer(Player player, int roll) {
         int newCellForPlayer = (cellNumberForPlayerMap.get(player) + roll) % 12;
         cellNumberForPlayerMap.put(player, newCellForPlayer);
-        System.out.println(player.getName() + "'s new location is " + cellNumberForPlayerMap.get(player));
+        console.printPlayerNewLocation(player, cellNumberForPlayerMap.get(player));
         System.out.println("The category is " + getCategoryForPlayer(player));
     }
 

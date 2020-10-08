@@ -14,4 +14,8 @@ public class Console {
         System.out.println(currentPlayer.getName() + " is the current player");
     }
 
+    public void printPlayerNewLocation(Player player, int cellNumber) {
+        System.out.println(player.getName() + "'s new location is " + cellNumber);
+    }
+
 }
