@@ -17,6 +17,8 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class Board {
+
+    private final Console console;
     // 12 cases
     private String[] cellsCategory = new String[]
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
@@ -26,7 +28,8 @@ public class Board {
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
 
-    public Board() {
+    public Board(Console console) {
+        this.console = console;
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
@@ -34,8 +37,7 @@ public class Board {
         Player player = new Player(playerName);
         players.add(player);
         cellNumberForPlayerMap.put(player, 0);
-        System.out.println(player.getName() + " was added");
-        System.out.println("They are player number " + cellNumberForPlayerMap.size());
+        console.printAddPlayer(playerName, players.size());
     }
 
     public int getNumberOfPlayers() {

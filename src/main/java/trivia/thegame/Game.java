@@ -21,6 +21,7 @@ public class Game {
 
 
     private final Board board;
+    private final Console console;
     Player currentPlayer;
 
     LinkedList popQuestions = new LinkedList();
@@ -30,8 +31,9 @@ public class Game {
 
     boolean hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion;
 
-    public Game(Board board) {
+    public Game(Board board, Console console) {
         this.board = board;
+        this.console = console;
         System.err.println("NEW instance of GAME!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
