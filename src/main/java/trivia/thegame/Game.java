@@ -16,7 +16,8 @@ public class Game {
     private static int NUMBER_OF_COINS_TO_WIN = 6;
     private static int NUMBER_QUESTION = 50;
 
-    Board board = new Board(MAX_PLAYERS);
+
+    private final Board board; // = new Board(MAX_PLAYERS);
 
     ArrayList players = new ArrayList();
     //    int[] places = new int[MAX_PLAYERS]; => now in Board
@@ -31,7 +32,8 @@ public class Game {
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
-    public Game() {
+    public Game(Board board) {
+        this.board = board;
         System.err.println("NEW instance of GAME!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 

@@ -1,5 +1,12 @@
 package trivia.thegame;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
+@Component
+@Scope(SCOPE_PROTOTYPE)
 public class Board {
     private final int MAX_PLAYERS;
     // 12 cases
@@ -8,10 +15,9 @@ public class Board {
                     "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
     private int[] cellNumberOfPlayers;
-    private int nbPlayers = 0;
 
-    public Board(int max_players) {
-        MAX_PLAYERS = max_players;
+    public Board() {
+        MAX_PLAYERS = 5;
         cellNumberOfPlayers = new int[MAX_PLAYERS];
     }
 
@@ -19,10 +25,6 @@ public class Board {
         return cellsCategory[cellNumber];
     }
 
-    public void addPlayer() {
-        cellNumberOfPlayers[nbPlayers] = 0;
-        nbPlayers++;
-    }
 
     public int getPlaceOfPlayer(int player) {
         return cellNumberOfPlayers[player];
