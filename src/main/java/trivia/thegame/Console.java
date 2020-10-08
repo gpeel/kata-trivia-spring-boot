@@ -33,8 +33,12 @@ public class Console {
     public void printCorrectAnswer() {
         System.out.println("Answer was correct!!!!");
     }
+
     public void printIncorrectAnswer() {
         System.out.println("Question was incorrectly answered");
     }
 
+    public void printRoll(int roll) {
+        System.out.println("They have rolled a " + roll);
+    }
 }

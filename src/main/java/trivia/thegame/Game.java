@@ -30,7 +30,6 @@ public class Game {
 
     // local
     Player currentPlayer;
-
     boolean hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion;
 
     public Game(Board board, Console console, GameProperties gameProperties) {
@@ -56,7 +55,7 @@ public class Game {
 
     public void roll(int roll) {
         currentPlayer = board.nextCurrentPlayer();
-        System.out.println("They have rolled a " + roll);
+        console.printRoll(roll);
 
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
