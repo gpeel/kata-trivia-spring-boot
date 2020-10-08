@@ -39,7 +39,7 @@ public class Player {
         this.inPenaltyBox = true;
     }
 
-    public void getOutOfPenalTyBox() {
+    public void getOutOfPenaltyBox() {
         this.inPenaltyBox = false;
     }
 }

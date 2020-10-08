@@ -66,8 +66,6 @@ public class Game {
             currentPlayer = players.get(0);
         }
 
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
     }
 
     public void roll(int roll) {
@@ -123,7 +121,7 @@ public class Game {
                 System.out.println("Answer was correct!!!!");
                 currentPlayer.incrementGold();
                 currentPlayer.printPlayerBankAccount();
-                currentPlayer.getOutOfPenalTyBox();
+                currentPlayer.getOutOfPenaltyBox();
             }
         } else {
             System.out.println("Answer was correct!!!!");

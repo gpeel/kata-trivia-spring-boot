@@ -16,14 +16,16 @@ public class Board {
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
                     "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
-    private Map<Player, Integer> cellNumberOfPlayers = new HashMap<>();
+    private Map<Player, Integer> cellNumberForPlayerMap = new HashMap<>();
 
     public Board() {
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public void addPlayer(Player player) {
-        cellNumberOfPlayers.put(player, new Integer(0));
+        cellNumberForPlayerMap.put(player, new Integer(0));
+        System.out.println(player.getName() + " was added");
+        System.out.println("They are player number " + cellNumberForPlayerMap.size());
     }
 
     public String getCellCategory(int cellNumber) {
@@ -31,17 +33,17 @@ public class Board {
     }
 
     public String getCategoryForPlayer(Player player) {
-        return cellsCategory[cellNumberOfPlayers.get(player)];
+        return cellsCategory[cellNumberForPlayerMap.get(player)];
     }
 
     public int getCellNumberForPlayer(Player player) {
-        return cellNumberOfPlayers.get(player);
+        return cellNumberForPlayerMap.get(player);
     }
 
     public void movePlayerWithRoll(Player player, int roll) {
-        int newCellForPlayer = (cellNumberOfPlayers.get(player) + roll) % 12;
-        cellNumberOfPlayers.put(player, new Integer(newCellForPlayer));
-        System.out.println(player.getName() + "'s new location is " + cellNumberOfPlayers.get(player));
+        int newCellForPlayer = (cellNumberForPlayerMap.get(player) + roll) % 12;
+        cellNumberForPlayerMap.put(player, new Integer(newCellForPlayer));
+        System.out.println(player.getName() + "'s new location is " + cellNumberForPlayerMap.get(player));
     }
 
 }
