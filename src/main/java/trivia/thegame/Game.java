@@ -43,12 +43,8 @@ public class Game {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast("Rock Question " + i);
         }
-    }
-
-    public String createRockQuestion(int index) {
-        return "Rock Question " + index;
     }
 
 
@@ -67,10 +63,10 @@ public class Game {
 
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
-                System.out.println(currentPlayer.getName() + " is not getting out of the penalty box");
+                console.printNotGettingOutOfPenaltyBox(currentPlayer.getName());
                 hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = false;
             } else {
-                System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
+                console.printGettingOutOfPenaltyBox(currentPlayer.getName());
                 hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = true;
                 board.movePlayer(currentPlayer, roll);
                 askQuestion();
@@ -104,13 +100,13 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (currentPlayer.isInPenaltyBox()) {
             if (hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion) {
-                System.out.println("Answer was correct!!!!");
+                console.printCorrectAnswer();
                 currentPlayer.incrementGold();
                 currentPlayer.printPlayerBankAccount();
                 currentPlayer.getOutOfPenaltyBox();
             }
         } else {
-            System.out.println("Answer was correct!!!!");
+            console.printCorrectAnswer();
             currentPlayer.incrementGold();
             currentPlayer.printPlayerBankAccount();
         }
@@ -118,7 +114,7 @@ public class Game {
     }
 
     public boolean wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
+        console.printIncorrectAnswer();
         currentPlayer.goToPenalTyBox();
         return true;
     }
