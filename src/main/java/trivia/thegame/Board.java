@@ -7,12 +7,12 @@ public class Board {
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
                     "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
-    private int[] playersCell;
+    private int[] cellNumberOfPlayers;
     private int nbPlayers = 0;
 
     public Board(int max_players) {
         MAX_PLAYERS = max_players;
-        playersCell = new int[MAX_PLAYERS];
+        cellNumberOfPlayers = new int[MAX_PLAYERS];
     }
 
     public String getCellCategory(int cellNumber) {
@@ -20,17 +20,17 @@ public class Board {
     }
 
     public void addPlayer() {
-        playersCell[nbPlayers] = 0;
+        cellNumberOfPlayers[nbPlayers] = 0;
         nbPlayers++;
     }
 
     public int getPlaceOfPlayer(int player) {
-        return playersCell[player];
+        return cellNumberOfPlayers[player];
     }
 
     public void movePlayerWithRoll(int player, String playerName, int roll) {
-        playersCell[player] = (playersCell[player] + roll) % 12;
-        System.out.println(playerName + "'s new location is " + playersCell[player]);
+        cellNumberOfPlayers[player] = (cellNumberOfPlayers[player] + roll) % 12;
+        System.out.println(playerName + "'s new location is " + cellNumberOfPlayers[player]);
     }
 
 }
