@@ -50,6 +50,7 @@ public class SystemBufferTestExecutionListener extends AbstractTestExecutionList
     private final PrintStream originalErr = System.err;
 
     private ByteArrayOutputStream outContent;
+    private ByteArrayOutputStream errContent;
 
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("beforeTestClass : {}", testContext.getTestClass());
@@ -74,6 +75,18 @@ public class SystemBufferTestExecutionListener extends AbstractTestExecutionList
                         .in(testInstance)
                         .get();
             }
+            annotations = field.getDeclaredAnnotationsByType(ErrContent.class);
+            if (annotations.length > 0) {
+                System.out.println(field.getName());
+                Reflection.field(field.getName())
+                        .ofType(ByteArrayOutputStream.class)
+                        .in(testInstance)
+                        .set(new ByteArrayOutputStream());
+                errContent = Reflection.field(field.getName())
+                        .ofType(ByteArrayOutputStream.class)
+                        .in(testInstance)
+                        .get();
+            }
         }
 
 
@@ -81,15 +94,23 @@ public class SystemBufferTestExecutionListener extends AbstractTestExecutionList
 
     public void beforeTestMethod(TestContext testContext) throws Exception {
         logger.info("beforeTestMethod : {}", testContext.getTestMethod());
-        System.setOut(new PrintStream(outContent));
-//        System.setErr(new PrintStream(errContent));
+        if (outContent != null) {
+            System.setOut(new PrintStream(outContent));
+        }
+        if (errContent != null) {
+            System.setErr(new PrintStream(errContent));
+        }
     }
 
 
     public void afterTestMethod(TestContext testContext) throws Exception {
         logger.info("afterTestMethod : {}", testContext.getTestMethod());
-        System.setOut(originalOut);
-//        System.setErr(originalErr);
+        if (outContent != null) {
+            System.setOut(originalOut);
+        }
+        if (errContent != null) {
+            System.setErr(originalErr);
+        }
     }
 
     public void afterTestClass(TestContext testContext) throws Exception {

@@ -26,8 +26,11 @@ class GameRightShould {
 
     @OutContent
     private ByteArrayOutputStream outContent;
-    @ErrContent
-    private ByteArrayOutputStream errContent;
+
+    // Optional
+    // stderr is not used in this test
+    //    @ErrContent
+    //    private ByteArrayOutputStream errContent;
 
     @Test
     public void test_game_5_players_MAX() {
