@@ -79,14 +79,14 @@ public class Game {
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 board.movePlayerWithRoll(currentPlayer, (String) players.get(currentPlayer), roll);
 
-                System.out.println("The category is " + board.getCategory(getPlaceOfCurrentPlayer()));
+                System.out.println("The category is " + board.getCellCategory(getPlaceOfCurrentPlayer()));
 
                 askQuestion();
             }
 
         } else {
             board.movePlayerWithRoll(currentPlayer, (String) players.get(currentPlayer), roll);
-            System.out.println("The category is " + board.getCategory(getPlaceOfCurrentPlayer()));
+            System.out.println("The category is " + board.getCellCategory(getPlaceOfCurrentPlayer()));
             askQuestion();
         }
 
@@ -98,13 +98,13 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (board.getCategory(getPlaceOfCurrentPlayer()).equals("Pop"))
+        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (board.getCategory(getPlaceOfCurrentPlayer()).equals("Science"))
+        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (board.getCategory(getPlaceOfCurrentPlayer()).equals("Sports"))
+        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (board.getCategory(getPlaceOfCurrentPlayer()).equals("Rock"))
+        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
     }
 

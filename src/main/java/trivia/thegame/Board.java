@@ -3,35 +3,34 @@ package trivia.thegame;
 public class Board {
     private final int MAX_PLAYERS;
     // 12 cases
-    private String[] categoryOfCase = new String[]
+    private String[] cellsCategory = new String[]
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
                     "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
-    private int[] places;
+    private int[] playersCell;
     private int nbPlayers = 0;
 
     public Board(int max_players) {
         MAX_PLAYERS = max_players;
-        places = new int[MAX_PLAYERS];
+        playersCell = new int[MAX_PLAYERS];
     }
 
-    public String getCategory(int caseNumber) {
-        return categoryOfCase[caseNumber];
+    public String getCellCategory(int cellNumber) {
+        return cellsCategory[cellNumber];
     }
 
     public void addPlayer() {
-        places[nbPlayers] = 0;
+        playersCell[nbPlayers] = 0;
         nbPlayers++;
     }
 
     public int getPlaceOfPlayer(int player) {
-        return places[player];
+        return playersCell[player];
     }
 
     public void movePlayerWithRoll(int player, String playerName, int roll) {
-        places[player] = (places[player] + roll);
-        if (places[player] > 11) places[player] = places[player] - 12;
-        System.out.println(playerName + "'s new location is " + places[player]);
+        playersCell[player] = (playersCell[player] + roll) % 12;
+        System.out.println(playerName + "'s new location is " + playersCell[player]);
     }
 
 }
