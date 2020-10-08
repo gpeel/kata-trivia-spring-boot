@@ -2,7 +2,6 @@ package transfo.right;
 
 public class GameRightTestData {
 
-
     public static final String REPONSE_GAME_5_PLAYERS =
             //<editor-fold desc="REPONSE_GAME_5_PLAYERS">
             "Maxime was added\r\n" +
@@ -221,7 +220,6 @@ public class GameRightTestData {
                     "Answer was corrent!!!!\r\n" +
                     "Arnaud now has 6 Gold Coins.\r\n";
     //</editor-fold>
-
 
     public static final String REPONSE_GAME_3_PLAYERS =
             //<editor-fold desc="REPONSE_GAME_3_PLAYERS">

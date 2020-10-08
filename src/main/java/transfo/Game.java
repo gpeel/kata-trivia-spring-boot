@@ -126,7 +126,7 @@ public class Game {
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-
+//                inPenaltyBox[currentPlayer] = false; // BUG correction to aneble to leave the Penalty BOX
             }
 //            else {
 //                nextPlayer();
