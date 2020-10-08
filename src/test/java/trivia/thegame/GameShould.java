@@ -45,8 +45,8 @@ class GameShould {
 
         try {
             aGame.add("Alexandre");
-            fail("ONlY 5 players max!");
-        } catch (ArrayIndexOutOfBoundsException e) {
+            fail("ONLY 5 players max!");
+        } catch (Exception e) {
             // je dois passer ICI
             hasException = true;
         }
@@ -110,8 +110,8 @@ class GameShould {
         aGame.wasCorrectlyAnswered(); // KO no more Gold !
 
         // ASSERT
-        assertThat(outContent.toString().replaceAll("\n", "").replaceAll("\r", ""))
-                .isEqualTo(REPONSE_CORRECTED_IF_PENALTY_VISITED_NO_MORE_GOLD_ON_EVEN_ROLL.replaceAll("\n", "").replaceAll("\r", ""));
+        assertThat(outContent.toString().replaceAll("\r\n", "\n"))
+                .isEqualTo(REPONSE_CORRECTED_IF_PENALTY_VISITED_NO_MORE_GOLD_ON_EVEN_ROLL.replaceAll("\r\n", "\n"));
     }
 
     @Test
@@ -129,7 +129,8 @@ class GameShould {
                 notAWinner = aGame.wasCorrectlyAnswered();
             }
         } while (notAWinner);
-        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_2_PLAYERS);
+        assertThat(outContent.toString().replaceAll("\r\n", "\n"))
+                .isEqualTo(REPONSE_GAME_2_PLAYERS.replaceAll("\r\n", "\n"));
     }
 
     @Test
@@ -145,7 +146,8 @@ class GameShould {
             notAWinner = aGame.wasCorrectlyAnswered();
         } while (notAWinner);
 
-        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_3_PLAYERS);
+        assertThat(outContent.toString().replaceAll("\r\n", "\n"))
+                .isEqualTo(REPONSE_GAME_3_PLAYERS.replaceAll("\r\n", "\n"));
     }
 
     @Test
@@ -168,8 +170,8 @@ class GameShould {
         } while (notAWinner);
 //        assertThat(outContent.toString()).isEqualTo(REPONSE_GAME_5_PLAYERS);
         // ASSERT
-        assertThat(outContent.toString().replaceAll("\n", "").replaceAll("\r", ""))
-                .isEqualTo(REPONSE_CORRECTED_GAME_5_PLAYERS.replaceAll("\n", "").replaceAll("\r", ""));
+        assertThat(outContent.toString().replaceAll("\r\n", "\n"))
+                .isEqualTo(REPONSE_CORRECTED_GAME_5_PLAYERS.replaceAll("\r\n", "\n"));
 
     }
 

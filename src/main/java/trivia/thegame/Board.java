@@ -19,6 +19,7 @@ public class Board {
     public Board() {
         MAX_PLAYERS = 5;
         cellNumberOfPlayers = new int[MAX_PLAYERS];
+        System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public String getCellCategory(int cellNumber) {

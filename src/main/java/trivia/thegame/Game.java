@@ -6,30 +6,30 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class Game {
+
     private static int MAX_PLAYERS = 5;
     private static int NUMBER_OF_COINS_TO_WIN = 6;
     private static int NUMBER_QUESTION = 50;
 
 
-    private final Board board; // = new Board(MAX_PLAYERS);
+    private final Board board;
 
-    ArrayList players = new ArrayList();
-    //    int[] places = new int[MAX_PLAYERS]; => now in Board
-    int[] purses = new int[MAX_PLAYERS];
-    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
+    List<Player> players = new ArrayList();
+    Player currentPlayer;
+//    int currentPlayerIndex = 0;
 
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
 
-    int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
     public Game(Board board) {
@@ -55,110 +55,111 @@ public class Game {
         return (players.size() >= 2);
     }
 
-    public boolean add(String playerName) {
-        players.add(playerName);
-        int iP = players.size() - 1;
-//        places[iP] = 0;
-        purses[iP] = 0;
-        inPenaltyBox[iP] = false;
+    public void add(String playerName) {
+        if (players.size() >= MAX_PLAYERS) {
+            throw new RuntimeException("The limit MAX of Player is already reached!");
+        }
+        players.add(new Player(playerName));
+        if (players.size() == 1) {
+            currentPlayer = players.get(0);
+        }
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
-        return true;
     }
 
     public void roll(int roll) {
-        System.out.println(players.get(currentPlayer) + " is the current player");
+        System.out.println(currentPlayer.getName() + " is the current player");
         System.out.println("They have rolled a " + roll);
+        int indexOfCurrentPlayer = players.indexOf(currentPlayer);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
-                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+                System.out.println(currentPlayer.getName() + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             } else {
                 isGettingOutOfPenaltyBox = true;
 
-                System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-                board.movePlayerWithRoll(currentPlayer, (String) players.get(currentPlayer), roll);
+                System.out.println(currentPlayer.getName() + " is getting out of the penalty box");
+                board.movePlayerWithRoll(indexOfCurrentPlayer, (String) currentPlayer.getName(), roll);
 
-                System.out.println("The category is " + board.getCellCategory(getPlaceOfCurrentPlayer()));
+                int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
+                String cat = board.getCellCategory(cellNumber);
+
+                System.out.println("The category is " + cat);
 
                 askQuestion();
             }
 
         } else {
-            board.movePlayerWithRoll(currentPlayer, (String) players.get(currentPlayer), roll);
-            System.out.println("The category is " + board.getCellCategory(getPlaceOfCurrentPlayer()));
+            board.movePlayerWithRoll(indexOfCurrentPlayer, (String) currentPlayer.getName(), roll);
+            int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
+            String cat = board.getCellCategory(cellNumber);
+
+            System.out.println("The category is " + cat);
             askQuestion();
         }
 
     }
 
-    public void nextPlayer() {
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
-    }
 
     private void askQuestion() {
-        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Pop"))
+        int indexOfCurrentPlayer = players.indexOf(currentPlayer);
+        int cellNumber = board.getPlaceOfPlayer(indexOfCurrentPlayer);
+        String cat = board.getCellCategory(cellNumber);
+        if (cat.equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Science"))
+        if (cat.equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Sports"))
+        if (cat.equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (board.getCellCategory(getPlaceOfCurrentPlayer()).equals("Rock"))
+        if (cat.equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
-    }
-
-    private int getPlaceOfCurrentPlayer() {
-        return board.getPlaceOfPlayer(currentPlayer);
     }
 
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) {
+        if (currentPlayer.isInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
 
                 System.out.println("Answer was correct!!!!");
 
-                purses[currentPlayer]++;
+                currentPlayer.incrementGold();
 
-                System.out.println(players.get(currentPlayer)
+                System.out.println(currentPlayer.getName()
                         + " now has "
-                        + purses[currentPlayer]
+                        + currentPlayer.getPurse()
                         + " Gold Coins.");
 
-                inPenaltyBox[currentPlayer] = false; // BUG correction to aneble to leave the Penalty BOX
+                currentPlayer.getOutOfPenalTyBox();
             }
-//            else {
-//                nextPlayer();
-//                return true;
-//            }
         } else {
             System.out.println("Answer was correct!!!!");
 
-            purses[currentPlayer]++;
+            currentPlayer.incrementGold();
 
-            System.out.println(players.get(currentPlayer)
+            System.out.println(currentPlayer.getName()
                     + " now has "
-                    + purses[currentPlayer]
+                    + currentPlayer.getPurse()
                     + " Gold Coins.");
         }
-        boolean winner = didPlayerWin();
+        boolean winner = !currentPlayer.isWinner(NUMBER_OF_COINS_TO_WIN);
         nextPlayer();
         return winner;
     }
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
-        inPenaltyBox[currentPlayer] = true;
+        System.out.println(currentPlayer.getName() + " was sent to the penalty box");
+
+        currentPlayer.goToPenalTyBox();
         nextPlayer();
         return true;
     }
 
-
-    private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == NUMBER_OF_COINS_TO_WIN);
+    public void nextPlayer() {
+        currentPlayer = players.get((players.indexOf(currentPlayer) + 1) % players.size());
     }
+
+
 }
