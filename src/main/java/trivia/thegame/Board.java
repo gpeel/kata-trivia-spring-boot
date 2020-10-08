@@ -13,12 +13,15 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 /**
  * The Board class responsability is the layout and position of the board
  * ie what a cell category is, and where the Player(s) are.
+ * No Game Rules here.
  */
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class Board {
 
     private final Console console;
+    private final QuestionDeck questionDeck;
+
     // 12 cases
     private String[] cellsCategory = new String[]
             {"Pop", "Science", "Sports", "Rock", "Pop", "Science",
@@ -28,8 +31,9 @@ public class Board {
     private List<Player> players = new ArrayList<>();
     private Player currentPlayer;
 
-    public Board(Console console) {
+    public Board(Console console, QuestionDeck questionDeck) {
         this.console = console;
+        this.questionDeck = questionDeck;
         System.err.println("NEW instance of BOARD !!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
