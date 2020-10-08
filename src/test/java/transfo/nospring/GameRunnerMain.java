@@ -1,9 +1,11 @@
-package transfo;
+package transfo.nospring;
+
+import transfo.Game;
 
 import java.util.Random;
 
 
-public class GameRunner {
+public class GameRunnerMain {
 
     private static boolean notAWinner;
 

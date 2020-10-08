@@ -1,49 +1,33 @@
-package transfo;
+package transfo.right;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestExecutionListeners;
+import transfo.Game;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static transfo.GameTestData.*;
+import static transfo.right.GameRightTestData.*;
 
 @SpringBootTest
-class GameShould {
-    private final Game game;
+@TestExecutionListeners(SystemBufferTestExecutionListener.class)
+class GameRightShould {
+
+    private final Game aGame;
+    private boolean notAWinner;
 
     @Autowired
-    public GameShould(Game game) {this.game = game;}
+    public GameRightShould(Game game) {this.aGame = game;}
 
-
-    private static boolean notAWinner;
-    private Game aGame;
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
-
-    @BeforeEach
-    public void setUpStreams() {
-        aGame = new Game();
-        aGame.initialize();
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
+    @OutContent
+    private ByteArrayOutputStream outContent;
+    @ErrContent
+    private ByteArrayOutputStream errContent;
 
     @Test
     public void test_game_5_players_MAX() {
@@ -106,7 +90,6 @@ class GameShould {
         aGame.add("Geoffrey");
         aGame.add("Gauthier");
         aGame.add("Arnaud");
-
         Random rand = new Random(177777);
 
         do {

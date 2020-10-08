@@ -1,12 +1,10 @@
-package transfo;
-
-import org.springframework.stereotype.Component;
+package transfo.notfinished;
 
 import javax.annotation.PostConstruct;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-@Component
+//@Component
 public class Interceptor extends PrintStream {
 
     StringBuffer stringBuffer;

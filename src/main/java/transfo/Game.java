@@ -1,12 +1,16 @@
 package transfo;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
 @Component
+@Scope(SCOPE_PROTOTYPE)
 public class Game {
     private static int MAX_PLAYERS = 5;
     private static int NUMBER_OF_COINS_TO_WIN = 6;
@@ -15,7 +19,7 @@ public class Game {
     Board board = new Board(MAX_PLAYERS);
 
     ArrayList players = new ArrayList();
-    //    int[] places = new int[MAX_PLAYERS];
+    //    int[] places = new int[MAX_PLAYERS]; => now in Board
     int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
@@ -26,6 +30,10 @@ public class Game {
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
+
+    public Game() {
+        System.err.println("NEW instance of GAME!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
 
     @PostConstruct
     public void initialize() {
