@@ -33,7 +33,7 @@ public class Game {
 
     // local
     Player currentPlayer;
-    boolean hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion;
+    boolean isGettingOutOfPenaltyBoxSoBeAskedAQuestion;
 
     public Game(Board board, Console console, GameProperties gameProperties) {
         this.board = board;
@@ -63,10 +63,10 @@ public class Game {
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 == 0) {
                 console.printNotGettingOutOfPenaltyBox(currentPlayer.getName());
-                hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = false;
+                isGettingOutOfPenaltyBoxSoBeAskedAQuestion = false;
             } else {
                 console.printGettingOutOfPenaltyBox(currentPlayer.getName());
-                hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion = true;
+                isGettingOutOfPenaltyBoxSoBeAskedAQuestion = true;
                 board.movePlayer(currentPlayer, roll);
                 board.askQuestion();
             }
@@ -81,7 +81,7 @@ public class Game {
      */
     public boolean rightAnswer() {
         if (currentPlayer.isInPenaltyBox()) {
-            if (hasTheRightToGetOutOfThePenaltyBoxAndAskedAQuestion) {
+            if (isGettingOutOfPenaltyBoxSoBeAskedAQuestion) {
                 console.printCorrectAnswer();
                 currentPlayer.incrementGold();
                 currentPlayer.printPlayerBankAccount();
